@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Builder</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e3ecf7, #f8fbff);
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+        color: #2c3e50;
+    }
+
+    .container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .form, .preview {
+        flex: 1;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #357abd;
+    }
+
+    .preview img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    .section-title {
+        color: #4a90e2;
+        margin-top: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>📄 Resume Builder</h1>
+
+<div class="container">
+
+    <!-- FORM -->
+    <div class="form">
+        <input type="text" id="name" placeholder="Full Name">
+        <input type="email" id="email" placeholder="Email">
+        <input type="text" id="phone" placeholder="Phone">
+
+        <textarea id="about" placeholder="About You"></textarea>
+        <input type="text" id="skills" placeholder="Skills (comma separated)">
+        <textarea id="education" placeholder="Education"></textarea>
+        <textarea id="experience" placeholder="Experience"></textarea>
+
+        <input type="file" id="image">
+
+        <button onclick="generateResume()">Generate Resume</button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview">
+        <img id="preview-img" src="https://via.placeholder.com/100">
+
+        <h2 id="preview-name">Your Name</h2>
+        <p id="preview-email">email@example.com</p>
+        <p id="preview-phone">XXXXXXXXXX</p>
+
+        <h3 class="section-title">About</h3>
+        <p id="preview-about">---</p>
+
+        <h3 class="section-title">Skills</h3>
+        <p id="preview-skills">---</p>
+
+        <h3 class="section-title">Education</h3>
+        <p id="preview-education">---</p>
+
+        <h3 class="section-title">Experience</h3>
+        <p id="preview-experience">---</p>
+    </div>
+
+</div>
+
+<script>
+function generateResume() {
+
+    // Get values
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const about = document.getElementById("about").value;
+    const skills = document.getElementById("skills").value;
+    const education = document.getElementById("education").value;
+    const experience = document.getElementById("experience").value;
+
+    // FIX: No undefined values
+    document.getElementById("preview-name").innerText = name || "Your Name";
+    document.getElementById("preview-email").innerText = email || "email@example.com";
+    document.getElementById("preview-phone").innerText = phone || "XXXXXXXXXX";
+    document.getElementById("preview-about").innerText = about || "---";
+    document.getElementById("preview-skills").innerText = skills || "---";
+    document.getElementById("preview-education").innerText = education || "---";
+    document.getElementById("preview-experience").innerText = experience || "---";
+
+    // Image preview
+    const file = document.getElementById("image").files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("preview-img").src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+</script>
+
+</body>
+</html>
