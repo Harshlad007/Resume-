@@ -1,4 +1,4 @@
-
+// LIVE PREVIEW
 document.querySelectorAll("input, textarea").forEach(field => {
     field.addEventListener("input", generateResume);
 });
@@ -26,7 +26,7 @@ function generateResume() {
     document.getElementById("preview-experience").innerText =
         document.getElementById("experience").value || "---";
 
-    
+    // Image preview
     const file = document.getElementById("image").files[0];
     if (file) {
         const reader = new FileReader();
@@ -37,7 +37,7 @@ function generateResume() {
     }
 }
 
-
+// 🔥 FINAL PDF FUNCTION (NO UI CHANGE + MULTI PAGE)
 function downloadPDF() {
 
     const original = document.getElementById("resume");
