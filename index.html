@@ -3,171 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resume Builder</title>
+<title>Premium Resume Builder</title>
+
+<!-- Link CSS -->
+<link rel="stylesheet" href="style.css">
 
 <!-- PDF Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #dfe9f3, #ffffff);
-    }
-
-    h1 {
-        text-align: center;
-        padding: 15px;
-        color: #2c3e50;
-    }
-
-    .container {
-        display: flex;
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .form, .preview {
-        flex: 1;
-        background: white;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-
-    input, textarea {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
-
-    button {
-        width: 100%;
-        padding: 12px;
-        margin-top: 10px;
-        background: #4a90e2;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    button:hover {
-        background: #357abd;
-    }
-
-    .preview img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        border: 3px solid #4a90e2;
-    }
-
-    .section-title {
-        color: #4a90e2;
-        margin-top: 15px;
-    }
-</style>
 </head>
-
 <body>
 
-<h1>📄 Resume Builder</h1>
+<h1>Premium Resume Builder</h1>
 
-<div class="container">
+<div class="form">
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="text" id="phone" placeholder="Phone">
 
-    <!-- FORM -->
-    <div class="form">
-        <input type="text" id="name" placeholder="Full Name">
-        <input type="email" id="email" placeholder="Email">
-        <input type="text" id="phone" placeholder="Phone">
+    <textarea id="about" placeholder="About You"></textarea>
+    <input type="text" id="skills" placeholder="Skills (comma separated)">
+    <textarea id="education" placeholder="Education"></textarea>
+    <textarea id="experience" placeholder="Experience"></textarea>
 
-        <textarea id="about" placeholder="About You"></textarea>
-        <input type="text" id="skills" placeholder="Skills (comma separated)">
-        <textarea id="education" placeholder="Education"></textarea>
-        <textarea id="experience" placeholder="Experience"></textarea>
+    <input type="file" id="image">
 
-        <input type="file" id="image">
+    <button onclick="generateResume()">Generate Resume</button>
+    <button onclick="downloadPDF()">Download Premium PDF</button>
+</div>
 
-        <button onclick="generateResume()">Generate Resume</button>
-        <button onclick="downloadPDF()">Download PDF</button>
-    </div>
-
-    <!-- PREVIEW -->
-    <div class="preview" id="resume">
+<div id="resume">
+    <div class="section" id="header">
         <img id="preview-img" src="https://via.placeholder.com/100">
-
         <h2 id="preview-name">Your Name</h2>
         <p id="preview-email">email@example.com</p>
         <p id="preview-phone">XXXXXXXXXX</p>
-
-        <h3 class="section-title">About</h3>
-        <p id="preview-about">---</p>
-
-        <h3 class="section-title">Skills</h3>
-        <p id="preview-skills">---</p>
-
-        <h3 class="section-title">Education</h3>
-        <p id="preview-education">---</p>
-
-        <h3 class="section-title">Experience</h3>
-        <p id="preview-experience">---</p>
     </div>
 
+    <div class="section">
+        <h3>About</h3>
+        <p id="preview-about">---</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section">
+        <h3>Skills</h3>
+        <div id="preview-skills">---</div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section">
+        <h3>Education</h3>
+        <p id="preview-education">---</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section">
+        <h3>Experience</h3>
+        <p id="preview-experience">---</p>
+    </div>
 </div>
 
-<script>
-
-// LIVE PREVIEW
-document.querySelectorAll("input, textarea").forEach(field => {
-    field.addEventListener("input", generateResume);
-});
-
-function generateResume() {
-
-    document.getElementById("preview-name").innerText =
-        document.getElementById("name").value || "Your Name";
-
-    document.getElementById("preview-email").innerText =
-        document.getElementById("email").value || "email@example.com";
-
-    document.getElementById("preview-phone").innerText =
-        document.getElementById("phone").value || "XXXXXXXXXX";
-
-    document.getElementById("preview-about").innerText =
-        document.getElementById("about").value || "---";
-
-    document.getElementById("preview-skills").innerText =
-        document.getElementById("skills").value || "---";
-
-    document.getElementById("preview-education").innerText =
-        document.getElementById("education").value || "---";
-
-    document.getElementById("preview-experience").innerText =
-        document.getElementById("experience").value || "---";
-
-    // Image preview
-    const file = document.getElementById("image").files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById("preview-img").src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
-}
-
-// DOWNLOAD PDF
-function downloadPDF() {
-    const element = document.getElementById("resume");
-
-    html2pdf().from(element).save("My_Resume.pdf");
-}
-
-</script>
-
+<!-- Link JS -->
+<script src="script.js"></script>
 </body>
 </html>
