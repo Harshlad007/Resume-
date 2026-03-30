@@ -1,79 +1,55 @@
-let skills = [];
+// LIVE PREVIEW
+document.querySelectorAll("input, textarea").forEach(field => {
+    field.addEventListener("input", generateResume);
+});
 
-// Add Skill
-function addSkill() {
-    let name = document.getElementById("skillName").value;
-    let level = document.getElementById("skillLevel").value;
-
-    if(name && level){
-        skills.push({name, level});
-        displaySkills();
-
-        document.getElementById("skillName").value = "";
-        document.getElementById("skillLevel").value = "";
-    }
-}
-
-// Preview
-function displaySkills(){
-    let preview = document.getElementById("skillPreview");
-    preview.innerHTML = "";
-
-    skills.forEach(s=>{
-        let p = document.createElement("p");
-        p.innerText = s.name + " (" + s.level + "%)";
-        preview.appendChild(p);
-    });
-}
-
-// Generate Resume
 function generateResume(){
-    rName.innerText = name.value;
-    rEmail.innerText = email.value;
-    rPhone.innerText = phone.value;
-    rAbout.innerText = about.value;
-    rEducation.innerText = education.value;
-    rExperience.innerText = experience.value;
+    document.getElementById("preview-name").innerText = document.getElementById("name").value || "Your Name";
+    document.getElementById("preview-email").innerText = document.getElementById("email").value || "email@example.com";
+    document.getElementById("preview-phone").innerText = document.getElementById("phone").value || "XXXXXXXXXX";
+    document.getElementById("preview-about").innerText = document.getElementById("about").value || "---";
 
-    let container = document.getElementById("rSkills");
-    container.innerHTML = "";
+    // Skills as bars
+    let skillsInput = document.getElementById("skills").value;
+    let skillsContainer = document.getElementById("preview-skills");
+    skillsContainer.innerHTML = "";
+    if(skillsInput){
+        let skills = skillsInput.split(",");
+        skills.forEach(s => {
+            let div = document.createElement("div");
+            div.className = "skill";
+            div.innerHTML = `
+                <p>${s.trim()}</p>
+                <div class="bar"><div class="fill" style="width:90%"></div></div>
+            `;
+            skillsContainer.appendChild(div);
+        });
+    } else {
+        skillsContainer.innerText = "---";
+    }
 
-    skills.forEach(s=>{
-        let div = document.createElement("div");
-        div.className = "skill";
+    document.getElementById("preview-education").innerText = document.getElementById("education").value || "---";
+    document.getElementById("preview-experience").innerText = document.getElementById("experience").value || "---";
 
-        div.innerHTML = `
-        <p>${s.name}</p>
-        <div class="bar">
-            <div class="fill" style="width:${s.level}%"></div>
-        </div>
-        `;
-
-        container.appendChild(div);
-    });
-
-    // Photo
-    let file = photo.files[0];
+    // Image preview
+    const file = document.getElementById("image").files[0];
     if(file){
-        let reader = new FileReader();
-        reader.onload = () => rPhoto.src = reader.result;
+        const reader = new FileReader();
+        reader.onload = e => document.getElementById("preview-img").src = e.target.result;
         reader.readAsDataURL(file);
     }
-
-    // SHOW POPUP
-    showPopup();
 }
 
-// Popup
-function showPopup() {
-    document.getElementById("popup").classList.add("active");
-}
-
-function closePopup() {
-    document.getElementById("popup").classList.remove("active");
-}
-
-// PDF
+// DOWNLOAD PDF
 function downloadPDF(){
-    html2pdf().from(document.getElementById("resume")).save();
+    const element = document.getElementById("resume");
+    const opt = {
+        margin: 0.5,
+        filename: "My_Premium_Resume.pdf",
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'] }
+    };
+    html2pdf().set(opt).from(element).save();
 }
