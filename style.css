@@ -1,28 +1,27 @@
-:root { --main-color: #3b82f6; }
-
 body {
+    margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: #f0f4f8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    background: linear-gradient(135deg, #dfe9f3, #ffffff);
 }
 
 h1 {
-    color: #1f2937;
     text-align: center;
-    margin-bottom: 20px;
+    padding: 15px;
+    color: #2c3e50;
 }
 
-/* FORM */
-.form {
-    width: 400px;
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.form, .preview {
+    flex: 1;
     background: white;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
 }
 
 input, textarea {
@@ -30,44 +29,69 @@ input, textarea {
     padding: 10px;
     margin: 8px 0;
     border-radius: 8px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #ccc;
 }
 
 button {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
-    background: var(--main-color);
+    background: #4a90e2;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
 }
 
-button:hover { background: #2563eb; }
+button:hover {
+    background: #357abd;
+}
 
-/* RESUME PREVIEW */
+.preview img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #4a90e2;
+}
+
+.section-title {
+    color: #4a90e2;
+    margin-top: 15px;
+}
+
+
 #resume {
-    width: 210mm;
-    min-height: 297mm;
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    overflow: visible;
-    color: #1f2937;
+    height: auto !important;
+    overflow: visible !important;
 }
 
-#resume h2 { color: var(--main-color); margin-bottom: 5px; }
-#resume h3 { color: var(--main-color); margin-top: 15px; margin-bottom: 5px; }
+.preview {
+    overflow: visible !important;
+}
 
-.section { margin-bottom: 20px; }
 
-/* Skill bar */
-.skill { margin: 8px 0; }
-.bar { height: 8px; background: #e2e8f0; border-radius: 5px; }
-.fill { height: 8px; background: var(--main-color); border-radius: 5px; }
+.section {
+    break-inside: avoid;
+}
 
-/* Page break for multi-page PDF */
-.page-break { page-break-before: always; }
+p {
+    break-inside: avoid;
+}
+
+
+#resume-pdf {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    width: 210mm;
+    background: white;
+    padding: 20px;
+}
+
+#resume-pdf * {
+    break-inside: avoid;
+}
+
+#resume-pdf img {
+    max-width: 100px;
+}
