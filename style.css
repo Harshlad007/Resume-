@@ -59,7 +59,7 @@ button:hover {
     margin-top: 15px;
 }
 
-
+/* ===== PDF FIX ===== */
 #resume {
     height: auto !important;
     overflow: visible !important;
@@ -69,7 +69,7 @@ button:hover {
     overflow: visible !important;
 }
 
-
+/* Prevent breaking */
 .section {
     break-inside: avoid;
 }
@@ -78,7 +78,7 @@ p {
     break-inside: avoid;
 }
 
-
+/* 🔥 Hidden PDF container (NO UI CHANGE) */
 #resume-pdf {
     position: absolute;
     left: -9999px;
