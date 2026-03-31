@@ -11,7 +11,7 @@
 
 <body>
 
-<h1>📄 Resume Builder</h1>
+<h1>✨ Build Your Professional Resume</h1>
 
 <div class="container">
 
@@ -33,37 +33,93 @@
     </div>
 
     <!-- PREVIEW -->
-    <div class="preview" id="resume">
-        <img id="preview-img" src="https://via.placeholder.com/100">
+    <div class="preview">
+        <img id="preview-img" src="https://via.placeholder.com/120">
 
         <h2 id="preview-name">Your Name</h2>
         <p id="preview-email">email@example.com</p>
         <p id="preview-phone">XXXXXXXXXX</p>
 
         <div class="section">
-            <h3 class="section-title">About</h3>
+            <h3>About</h3>
             <p id="preview-about">---</p>
         </div>
 
         <div class="section">
-            <h3 class="section-title">Skills</h3>
+            <h3>Skills</h3>
             <p id="preview-skills">---</p>
         </div>
 
         <div class="section">
-            <h3 class="section-title">Education</h3>
+            <h3>Education</h3>
             <p id="preview-education">---</p>
         </div>
 
         <div class="section">
-            <h3 class="section-title">Experience</h3>
+            <h3>Experience</h3>
             <p id="preview-experience">---</p>
         </div>
     </div>
 
 </div>
 
-<div id="resume-pdf"></div>
+<!-- PDF -->
+<div id="resume-pdf">
+
+    <!-- PAGE 1 -->
+    <div class="pdf-section">
+        <img id="pdf-img">
+        <h2 id="pdf-name"></h2>
+        <p id="pdf-email"></p>
+        <p id="pdf-phone"></p>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="pdf-section">
+        <h3>About</h3>
+        <p id="pdf-about"></p>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="pdf-section">
+        <h3>Skills</h3>
+        <p id="pdf-skills"></p>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="pdf-section">
+        <h3>Education</h3>
+        <p id="pdf-education"></p>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="pdf-section">
+        <h3>Experience</h3>
+        <p id="pdf-experience"></p>
+    </div>
+
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="spinner"></div>
+    <p>Generating PDF...</p>
+</div>
+
+<!-- SUCCESS POPUP -->
+<div id="success-popup">
+    <div class="popup-box">
+        <h2>✅ Download Complete</h2>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</div>
+
+<!-- GENERATE POPUP -->
+<div id="generate-popup">
+    <div class="popup-box">
+        <h2>✨ Resume Generated</h2>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
